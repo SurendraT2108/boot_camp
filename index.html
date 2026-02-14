@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHOC TECH COMPANY – Bootcamp Registration</title>
+
+    <style>
+        body {
+            background: #0e0e16;
+            color: white;
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* HEADER */
+        header {
+            background: #0b0b14;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #222;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .ceo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4bb8ff;
+        }
+
+        /* CARD */
+        .card {
+            background: #161622;
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #000;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+            background: #1f1f2e;
+            color: white;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        button {
+            width: 90%;
+            margin: 20px auto;
+            display: block;
+            padding: 15px;
+            background: #4bb8ff;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2e95d8;
+        }
+
+        h3 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>ADHOC TECH COMPANY – Project Bootcamp</h2>
+    <div class="ceo">CEO: Devika Prakruthi</div>
+</header>
+
+<form id="bootcampForm">
+
+    <!-- TEAM DETAILS -->
+    <div class="card">
+        <h3>Team Details</h3>
+
+        <label>College</label>
+        <select name="college" required>
+            <option value="">Select College</option>
+            <option>Aditya Degree College</option>
+            <option>Aditya Degree College for Womens</option>
+        </select>
+
+        <label>Branch</label>
+        <select name="branch" required>
+            <option value="">Select Branch</option>
+            <option>BCA</option>
+            <option>BSC(CS)</option>
+            <option>BCA(DS)</option>
+            <option>BSC(DS)</option>
+            <option>BAC1</option>
+            <option>BAC2</option>
+            <option>BCA(CS)</option>
+        </select>
+
+        <label>Section</label>
+        <select name="section" required>
+            <option value="">Select Section</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+        </select>
+
+        <label>Team Name</label>
+        <input type="text" name="teamName" required>
+    </div>
+
+    <!-- LEAD -->
+    <div class="card">
+        <h3>Team Lead (Member 1)</h3>
+
+        <label>Name</label>
+        <input type="text" name="leadName" required>
+
+        <label>Roll No</label>
+        <input type="text" name="leadRoll" required>
+
+        <label>Gmail</label>
+        <input type="email" name="leadEmail" required>
+
+        <label>Phone</label>
+        <input type="text" name="leadPhone" required>
+    </div>
+
+    <!-- MEMBERS 2–6 -->
+    <script>
+        const members = [2,3,4,5,6];
+    </script>
+
+    <div id="members"></div>
+
+    <script>
+        let container = document.getElementById("members");
+
+        members.forEach(num => {
+            container.innerHTML += `
+                <div class="card">
+                    <h3>Member ${num}</h3>
+
+                    <label>Name</label>
+                    <input type="text" name="m${num}_name" required>
+
+                    <label>Roll No</label>
+                    <input type="text" name="m${num}_roll" required>
+
+                    <label>Email</label>
+                    <input type="email" name="m${num}_email" required>
+
+                    <label>Phone</label>
+                    <input type="text" name="m${num}_phone" required>
+                </div>
+            `;
+        });
+    </script>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("bootcampForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    let dataObj = {};
+
+    formData.forEach((value, key) => {
+        dataObj[key] = value;
+    });
+
+    await fetch("https://script.google.com/macros/s/AKfycbxpf6DInWgIlO8krt5JcWh1slivXC9S16dvY9mlHZDKv6lTzCOY_YWJD-xgdCgaC3EY/exec", {
+        method: "POST",
+        body: JSON.stringify({ contents: JSON.stringify(dataObj) }),
+        headers: { "Content-Type": "text/plain;charset=utf-8" }
+    });
+
+    alert("Form Submitted Successfully!");
+    this.reset();
+});
+</script>
+
+</body>
+</html>
